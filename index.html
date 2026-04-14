@@ -1,90 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> Electronic Portfolio</title>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ostap Lutsyshyn ePortfolio</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
 <style>
+:root {
+    --bg1: #0a0000;
+    --bg2: #000000;
+    --accent: #ff2e2e;
+    --accent2: #ff6b6b;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
 body {
-  margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: white;
-  color: #111;
-  line-height: 1.6;
+    background: radial-gradient(circle at top, var(--bg1), var(--bg2) 60%);
+    color: white;
+    overflow-x: hidden;
 }
+
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle at 20% 20%, rgba(255,0,0,0.08), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255,0,0,0.06), transparent 40%);
+    animation: floatBG 10s ease-in-out infinite alternate;
+    z-index: -1;
+}
+
+@keyframes floatBG {
+    from { transform: translateY(0px); }
+    to { transform: translateY(10px); }
+}
+
+
 header {
-  background-color: #b30000;
-  color: white;
-  padding: 60px 20px;
-  text-align: center;
+    text-align: center;
+    padding: 70px 20px;
+    background: linear-gradient(135deg, rgba(255,0,0,0.25), rgba(0,0,0,0.9));
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,0,0,0.25);
 }
+
+header img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--accent);
+    box-shadow: 0 0 40px rgba(255,0,0,0.5);
+    transition: 0.4s ease;
+}
+
+header img:hover {
+    transform: scale(1.05);
+}
+
 header h1 {
-  font-size: 2.8em;
-  margin-bottom: 10px;
+    font-size: 2.8rem;
+    margin-top: 15px;
 }
+
 header p {
-  font-size: 1.2em;
+    color: var(--accent2);
 }
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,0,0,0.2);
+    z-index: 100;
+}
+
+nav button {
+    border: 1px solid rgba(255,0,0,0.5);
+    background: transparent;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+nav button:hover {
+    background: var(--accent);
+    transform: translateY(-2px);
+    box-shadow: 0 0 20px red;
+}
+
+
 section {
-  padding: 50px 20px;
-  max-width: 900px;
-  margin: auto;
+    display: none;
+    padding: 60px 15%;
+    animation: fadeIn 0.5s ease;
 }
-h2 {
-  color: #b30000;
-  font-size: 1.8em;
+
+.active { display: block; }
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-.highlight {
-  font-weight: bold;
-  color: #b30000;
-}
+
 .card {
-  border-left: 5px solid #b30000;
-  padding-left: 20px;
-  margin-top: 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,0,0,0.15);
+    padding: 25px;
+    margin: 18px 0;
+    border-radius: 18px;
+    backdrop-filter: blur(10px);
+    transition: 0.3s ease;
 }
-.cta {
-  background-color: #b30000;
-  color: white;
-  text-align: center;
-  padding: 60px 20px;
-  margin-top: 40px;
+
+.card:hover {
+    border-color: var(--accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(255,0,0,0.15);
 }
-.cta h2 {
-  color: white;
+
+h2 { color: var(--accent); margin-bottom: 10px; }
+h3 { color: var(--accent2); margin-top: 10px; }
+
+p {
+    color: #e6e6e6;
+    line-height: 1.7;
 }
-.cta button {
-  background-color: white;
-  color: #b30000;
-  border: none;
-  padding: 15px 30px;
-  font-size: 16px;
-  cursor: pointer;
-  font-weight: bold;
-  margin-top: 15px;
+
+.tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: rgba(255,0,0,0.1);
+    border: 1px solid rgba(255,0,0,0.3);
+    font-size: 12px;
+    margin-top: 8px;
 }
-footer {
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #555;
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+
+@media (max-width: 900px) {
+    section { padding: 30px 8%; }
 }
 </style>
 </head>
+
 <body>
 
 <header>
-  <h1>Welcome to my electronic portfolio </h1>
-  <p>Electronic portfolio of Florida State University student, Ostap Lutsyshyn</p>
-
+    <img src="your-photo.jpg" alt="Profile">
+    <h1>Ostap Lutsyshyn</h1>
+    <p>AI & Software Development ePortfolio</p>
 </header>
 
+<nav>
+    <button onclick="showSection('home')">Home</button>
+    <button onclick="showSection('proposal')">MP2 Proposal</button>
+    <button onclick="showSection('activity')">Campaign</button>
+    <button onclick="showSection('essay')">Essay</button>
+    <button onclick="showSection('reflection')">Reflection</button>
+</nav>
 
+<section id="home" class="active">
+    <div class="card">
+        <h2>Welcome</h2>
+        <p>This portfolio showcases my research on AI and its impact on software development.</p>
+        <span class="tag">AI</span>
+        <span class="tag">Software Engineering</span>
+    </div>
+</section>
 
-<footer>
-  <p> All the work shown on this webpage is an original work of Ostap Lutsyshyn </p>
-  <p></p>
-</footer>
+<!-- PROPOSAL -->
+<section id="proposal">
+    <div class="card">
+        <h2>MP2 Proposal</h2>
+        <p><strong>Reflection: something goes here, but thats for another day</strong></p>
+        <p>	The topic I researched for my previous project and the current one is “The effect of AI on software development”. For this idea to be explained in different genres I will need to conduct a research on what people pay attention to when they are trying to find thighs online and when they are just browsing on the internet. Since I have more of an academic research study, people are not likely to look for the detailed information on social media, but they might try to find all the depth of the topic on webpages. On the other hand if I want to get people interested in my investigation then I should start with something that will be the most eye-catching. 
+	The stance I decided to take on my topic is that AI will affect software development, but in a good way so that job opportunities will not decrease. This is a topic of great debate and might catch the attention just because it touches on something that is relevant today. 
+	The main audience for my topic will definitely be students and people that are currently in the computer science field. There is no age limit to students and people that are already working, and in the computer science field it is often that people that are just studying might know things that people working don’t know, simply because of how broad the field is. Therefore my first audience will be people that know about computer science, they will not need explanation of abbreviations and terms. Additionally provide more complex examples to the first audience. For the second audience, I would like to include people that are not into computer science, but they are just curious where AI is going, or maybe they are afraid for their job that is not CS related. Therefore the second audience will be people that have no CS background, but are interested in a trending topic of AI.
+	For my three genres I would definitely like to create a webpage in HTML, because I think if a person that is experienced in a field wants to find information they will look for it on google, so I will put the most detailed information on a webpage. For the second and third genre I would like to focus on my second audience, so I will create a social media post and a video that will catch the attention of a reader/viewer and explain the basics of a problem and my stance on it. 
+</p>
+    </div>
+</section>
+
+<!-- ACTIVITY -->
+<section id="activity">
+    <div class="card">
+        <h2>Multigenre Campaign Activity</h2>
+        <p><strong>Reflection: Something better go here</strong></p>
+        <p>For the webpage genre I decided to include the information from my investigative essay. With specific points like: 
+"...In any way it is going to be biased. You cannot get a perfect result from the LLM, just like you cannot get a unanimous answer when you ask an entire group of people..." , "...important distinction between regular chat GPT users and professionals that work on much larger LLMs..", and the price difference when software is created with help of AI. I am going to use those parts from my investigative field essay with some changes so that it has an informative and encouraging tone to it. 
+For the design of the webpage I decided to use only statistics images, without any destruction. Also I am going to use mainly red, because it gains trust and looks more prestigious. 
+I will use a formal tone, and maybe some little blocks that will say "share it with a friend", so that the actual information looks professional and formal, but the encouragement element is still met. </p>
+    </div>
+</section>
+
+<!-- ESSAY -->
+<section id="essay">
+    <div class="card">
+        <h2>Investigative Essay</h2>
+        <p><strong>How AI is changing software development careers</strong></p>
+    </div>
+
+    <div class="grid">
+        <div class="card">
+            <h3>Introduction</h3>
+            <p>In a world where most people have heard of AI and most of us use it daily, it is hard not to think about it taking over human jobs. With its capabilities growing with each year and free access for models like but not limited to chat-GPT this fear grows with each update. The purpose of this paper is to investigate the current capabilities of AI and LLMs and to gain understanding of future software development jobs. Also, investigate the possibilities of LLMs giving a perfect response to the user, including the current development and changing the way the model gives an answer. As recent research shows, “the significant impact of artificial intelligence on all essential stages of the software development process” is already seen (Kozub and Druzhynin), which makes this question even more important.</p>
+        </div>
+
+        <div class="card">
+            <h3>Analysis</h3>
+            <p>The way LLMs are created is by taking a huge amount of data that is stored in a memory of LLM. Hence when prompted to create something it has to refer to the data that is stored inside of it, and this is exactly why everything depends on initial data. The database is not written by a single person, and there is not really a need for it to be done by a single person, but information inside the database contradicts itself. If we are going to ask a question to the entire group of people, we are almost guaranteed to get different responses, so now we have all those responses inside of a single database that is trying to decide what answer is the most suited. This connects directly to how “natural language processing (NLP) is a branch of AI that focuses on the interaction between computers and human language” (Software: Practice and Experience), meaning that the model must interpret inconsistent human input at scale. On the other hand if there will be no contradiction then it will create a huge bias for the entire system. For example in a system that does not contradict itself we will not be able to get a proper answer on a question like “Is C++ objectively better than Java?”. This is because many prompts in statistical models have to deal with something that does not have a defined answer. Should it go for the most common response, should it combine responses into one? In any way it is going to be biased. You cannot get a perfect result from the LLM, just like you cannot get a unanimous answer when you ask an entire group of people. Therefore it is impossible to create something this big, without LLM needing oversight. This aligns with findings that integrating AI into software development involves “technical, ethical, methodological, and legal” challenges that make full adoption difficult (Kozub and Druzhynin).
+In this paper I will examine how these technical limitations directly affect real software development work and career paths. I will look at where AI tools are already replacing repetitive tasks, where they are only assisting developers, and where human decision making is still required. Current research supports this distinction, showing that automation growth is “especially high (20–50%) in repetitive tasks” while more complex tasks still require human input (Sauvola and Tarkoma). I will also analyze current research and industry data on productivity, accuracy, and risk when AI is used in programming workflows. The goal is not only to describe what AI can do today, but to investigate what roles developers will still need to fill in the future and which skills will become more important as AI tools continue to improve.
+The way to improve the response of AI when given a prompt is to give it better information to deal with. Before we explore a little deeper on how it is possible to improve the response, ask yourself how often do you tell someone any piece of information and they interpret it wrong? Chances are it happens more than you want to. Humans are the smartest species on this planet, while not everyone is exactly the same intelligence, it is not physically possible for us to create something that will overcome our thinking ability. Therefore it is important to be as precise as possible if something is done by the computer. “Model performance varies significantly with prompt structure, revealing limited robustness to input variation”(Qi et al. 10), which suggests that input is of great importance. This limitation also explains why “generative models often lose the broader context… potentially leading to discrepancies” (Software: Practice and Experience), reinforcing that better prompts alone cannot fully solve the issue. The VL-T5 model showed consistent accuracy of about 62%-65% when given a perfect prompt, but accuracy dropped to 11%-13% when given a non-specific prompt.
+The average user, when they use any statistical model, would use vague words like “wide, yellow, beautiful, well-structured”. For a human it is easy to understand a question like “Is this train yellow”, but for the LLMs yellow = #FFFF00, which is the purest yellow there is. The issue comes when LLM starts to analyze a picture and there is no #FFFF00, so the result for the question technically will be no. For a human like you and me #FCD12A is also going to be a perfectly good yellow, so we would answer this question “correctly” with no hesitation. Even though it is just a demonstration that might not sound that serious at first, it illustrates why there is never a right answer, especially when models rely on strict pattern recognition rather than human interpretation.
+This brings us to the important distinction between regular chat GPT users and professionals that work on much larger LLMs, and on models that are not even designed to take “yellow” as a prompt. Instead those models use something in between human language and computer language, which is known as computer code. Computer code is not just a fancy thing that programmers use, it is an organized language that has only one interpretation and there is no confusion between words and definitions (Qi et al. 11). This is one of the reasons why AI increases productivity but does not eliminate developers, since structured environments still require expertise. As research shows, modern development practices like Agile and DevOps have already increased productivity through tools, not replacing developers entirely (Sauvola and Tarkoma). Therefore, there is a safety net for CS specialists since the tool is great and can be of great benefit, but it is not like a business owner will be able to create the top tear software with no knowledge of computer science.
+Although LLMs cannot be perfect as they are for now simply because of the way they were created, it is possible to change the foundation a little bit. “Compared to state-of-the-art fine-tuning approaches for LLM personalization [35], HyPerAlign consistently achieves high win-rates (often > 90%) across a wide diversity of users and LLM models” (Gârbacea and Tan 2) this suggest if we can get as much data as possible from the human LLMs is going to work with we can put that data back into the huge matrix of LLM and get a better result. However, even with improvements, broader system-level challenges remain, as noted by Kozub and Druzhynin, meaning personalization does not eliminate core limitations.  Given this when you are going to prompt your question to the model, it will not only have the “base information” but also information about you that it will reference. There is an argument that Christina Gârbacea makes in an article, it is whether or not we should change the “data base”, which is called matrix, of the model so it fits the user, or instead of that we can set the data we got form the user and treat it as absolute true. For example if your opinion is that oranges are in all ways better than bananas it will treat it as a fact. Therefore the only references that will be left in a matrix will be references of oranges better than bananas. The difference it will give you is that when you are going to ask the model to write an essay on the topic “Why oranges are better than bananas” there will be absolutely no data that will suggest that it is not true or that there are opposing views to this. Of course this is just a simple example, but it can be translated to one's feeling of words, terms, beliefs etc. that will be able to make nearly perfect results for the LLM.  
+Of course there would be some downside to it, and it’s in cost. “By default, the model ranks these hypotheses according to their relevance. 8B models run on 2 A100 GPUs with 150 GB of memory, while 70B models run on 4 A100 GPUs with 320 GB of memory.”(Gârbacea and Tan 2), while it is possible to customize LLM for individual users, it is not as efficient in terms of GPU memory. This reinforces the idea that scaling AI systems is not just a technical issue but also an economic one. This will translate in a higher cost of operation and management of LLM, and considering that the entire data of LLM has to be contained on a single GPU and the price of memory in GPU does not scale with its amount. This said if you are to double the amount of GB you have in your GPUs you will get only about 10%-15% increase in precision, while paying more than double in maintenance per month and setup. 
+Because of this huge price for maintenance and scalability issues, even if we were to make individual LLMs we are definitely far from having models that will be able to create projects perfectly. Therefore people will continue using AI to help them with tasks, but it does not seem to be able to be so good that people will no longer need CS specialists. This is consistent with research showing that AI mainly boosts productivity in specific areas rather than fully replacing human roles (Sauvola and Tarkoma).For now it brings me to the thought that software, webpages, entertainment that is going to be developed in the future will have a better quality, but not necessarily less of it, or less people making it. The reason I think this is because CS specialists will spend less effort creating something, but it does not mean that people will settle for the same quality at a cheaper price. 
+Another piece of research that helps challenge my assumption about whether people will choose better quality even if price is the same or higher comes from consumer choice theory, where price isn’t just a number but a signal about expected quality. Studies on “experience goods”, which are products where you can’t know quality until after you’ve used them, show that consumers often rely on price as a cue for quality, which can pull their decisions in opposite directions. On the one hand, a higher price suggests higher quality and makes a product more attractive; on the other hand, a higher price also tightens the budget and discourages purchase (Palma et al. 30). What this means in real choices is that consumers weigh expected quality against price, not just the final cost itself. This supports the idea that if a better quality software appears at the same price as an older discounted one, many people could switch to the higher quality option because the price signal lifts its perceived value. This idea is further supported by research showing that improvements in development tools and processes have already led to significant productivity gains, particularly in areas that directly affect product quality (Sauvola and Tarkoma). So, rather than sticking with the cheaper old version forever, people may actually upgrade, and that suggests that computer science professionals will continue to be needed to build better products, because consumers will be willing to choose quality. Since everything in any industry comes down to the money there is in that market, there is strong evidence to suggest that people will just switch to the better quality product and jobs will still be open.
+After analyzing all the sources and looking at the situation from different perspectives my conclusion will be that the computer science market will not be negatively affected. Judging from the consumer behaviour there is going to be consumption of a better product, but at the same time it will take less resources to create that same project. In this situation consumers tend to settle for the affordable good quality product, which is exactly what the market is offering right now. This aligns with findings that AI primarily enhances efficiency in development rather than fully replacing human roles, especially in repetitive and lower-level tasks (Sauvola and Tarkoma). Analyzing the different strategies of improving on the systems we have right now came towards the conclusion that it is not profitable to do this. There are ways of making individual models and creating models with more memory, but when it ends up costing thousands times more than human labour it just is not worth it, especially considering the “technical, ethical, methodological, and legal” challenges that still limit full AI adoption (Kozub and Druzhynin). Even when looking at history, major technological breakthroughs rarely wipe out entire professions, but mostly they just change what those professions look like. When high-level programming languages were introduced, programmers did not disappear. When automation transformed manufacturing, engineers were still needed. What changed was the type of work they did and the skills that became valuable. Instead of removing people, new tools raised expectations and shifted responsibilities to more advanced tasks.
+</p>
+        </div>
+
+        <div class="card">
+            <h3>Conclusion</h3>
+            <p>AI seems to be following the same path. It can handle repetitive and time-consuming work, but that does not remove the need for human expertise. In fact, it makes certain skills even more important. Designing systems, planning architecture, ensuring security, validating outputs, and thinking through ethical implications are all responsibilities that cannot simply be automated away. Companies and businesses will still need professionals who understand not just how to generate code, but how to test it, improve it, scale it, and maintain it over time. As AI-generated results become more common, the ability to question them, verify them, and recognize their limitations becomes increasingly valuable. Rather than replacing software developers, AI is more likely to push them toward deeper problem solving, broader strategic thinking, and stronger collaboration across different fields.</p>
+        </div>
+    </div>
+</section>
+
+<!-- REFLECTION -->
+<section id="reflection">
+
+    <div class="card">
+        <h2>Final Reflection</h2>
+        <p>
+            Project one and two changed how I think about the role of artificial intelligence in software development.
+            Additionaly this was a great opprtunity to learn more about the field i ma studing, and practice my research and writing skills at the same time. 
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>What I Learned</h3>
+        <p>
+            //something 
+        </p>
+        <p>
+            //soemthing else
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Challenges</h3>
+        <p>
+           //something
+        </p>
+    </div>
+
+    <div class="card">
+        <h3>Personal Growth</h3>
+        <p>
+            //something
+        </p>
+    </div>
+
+   
+    <div class="card" style="border:1px solid red; box-shadow:0 0 25px rgba(255,0,0,0.25);">
+        <h3 style="color:#ff2e2e;">Key Takeaway</h3>
+        <p style="font-size:1.05rem;">
+            AI is not replacing developers—it is redefining them. The real advantage now comes from thinking
+            clearly, designing systems well, and adapting to AI-assisted workflows.
+        </p>
+    </div>
+
+</section>
+
+<script>
+function showSection(id) {
+    document.querySelectorAll("section").forEach(s => s.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+}
+</script>
 
 </body>
 </html>
